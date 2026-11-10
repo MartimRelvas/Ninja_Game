@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cwlb2ypwo716m"]
+
+[ext_resource type="PackedScene" uid="uid://2dkcypxpoinq" path="res://scene/tilemap.tscn" id="1_xwcet"]
+[ext_resource type="PackedScene" uid="uid://c32ger1wl80pp" path="res://scene/ninja.tscn" id="2_dbls1"]
+[ext_resource type="PackedScene" uid="uid://q4leojccqsr1" path="res://scene/enemy.tscn" id="3_33cqm"]
+
+[sub_resource type="Gradient" id="Gradient_p1ry8"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.04819277, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.49411765, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_efd0m"]
+gradient = SubResource("Gradient_p1ry8")
+fill = 1
+fill_from = Vector2(0.49565217, 0.50869566)
+fill_to = Vector2(0.8347826, 0.16521738)
+
+[sub_resource type="Gradient" id="Gradient_xlg7c"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8cnhq"]
+gradient = SubResource("Gradient_xlg7c")
+
+[node name="Node2D" type="Node2D" unique_id=1745933707]
+
+[node name="Tile" parent="." unique_id=1096608699 instance=ExtResource("1_xwcet")]
+position = Vector2(8.999908, -22.999992)
+scale = Vector2(1.3150051, 1.3150051)
+
+[node name="Ninja" parent="." unique_id=950649596 instance=ExtResource("2_dbls1")]
+position = Vector2(-338, 7)
+scale = Vector2(0.87999994, 0.87999994)
+
+[node name="Enemys" type="Node" parent="." unique_id=177994079]
+
+[node name="Enemy" parent="Enemys" unique_id=1577381894 instance=ExtResource("3_33cqm")]
+position = Vector2(-62.000008, -83.00001)
+
+[node name="Enemy2" parent="Enemys" unique_id=1518586608 instance=ExtResource("3_33cqm")]
+position = Vector2(1204.9999, -97)
+
+[node name="Enemy3" parent="Enemys" unique_id=639942042 instance=ExtResource("3_33cqm")]
+position = Vector2(1451.9999, -42.000004)
+
+[node name="Enemy4" parent="Enemys" unique_id=791148730 instance=ExtResource("3_33cqm")]
+position = Vector2(526.99994, -93)
+
+[node name="Enemy5" parent="Enemys" unique_id=2050650701 instance=ExtResource("3_33cqm")]
+position = Vector2(923.99994, -123.99999)
+
+[node name="Enemy6" parent="Enemys" unique_id=2140155739 instance=ExtResource("3_33cqm")]
+position = Vector2(-507, -130)
+
+[node name="Enemy7" parent="Enemys" unique_id=1836164052 instance=ExtResource("3_33cqm")]
+position = Vector2(290.99997, -60)
+
+[node name="Enemy8" parent="Enemys" unique_id=507494101 instance=ExtResource("3_33cqm")]
+position = Vector2(1975, -76)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1673447086]
+position = Vector2(779.99994, -61)
+scale = Vector2(1.2500007, 1.2500007)
+energy = 0.7
+texture = SubResource("GradientTexture2D_efd0m")
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=430765113]
+position = Vector2(512.25006, -56.999992)
+scale = Vector2(41.77344, 17.296875)
+energy = 0.7
+blend_mode = 1
+texture = SubResource("GradientTexture2D_8cnhq")
