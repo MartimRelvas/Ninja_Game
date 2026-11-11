@@ -22,7 +22,7 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8cnhq"]
 gradient = SubResource("Gradient_xlg7c")
 
-[node name="Node2D" type="Node2D" unique_id=1745933707]
+[node name="GAME" type="Node2D" unique_id=1745933707]
 
 [node name="Tile" parent="." unique_id=1096608699 instance=ExtResource("1_xwcet")]
 position = Vector2(8.999908, -22.999992)
@@ -50,7 +50,7 @@ position = Vector2(526.99994, -93)
 position = Vector2(923.99994, -123.99999)
 
 [node name="Enemy6" parent="Enemys" unique_id=2140155739 instance=ExtResource("3_33cqm")]
-position = Vector2(-507, -130)
+position = Vector2(-474.99997, -104)
 
 [node name="Enemy7" parent="Enemys" unique_id=1836164052 instance=ExtResource("3_33cqm")]
 position = Vector2(290.99997, -60)
@@ -67,6 +67,6 @@ texture = SubResource("GradientTexture2D_efd0m")
 [node name="PointLight2D2" type="PointLight2D" parent="." unique_id=430765113]
 position = Vector2(512.25006, -56.999992)
 scale = Vector2(41.77344, 17.296875)
-energy = 0.7
+energy = 0.5
 blend_mode = 1
 texture = SubResource("GradientTexture2D_8cnhq")

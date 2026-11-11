@@ -4,11 +4,15 @@ extends CharacterBody2D
 @onready var hitbox_area: Area2D = $hitboxArea
 @onready var health_bar: Node2D = $Camera2D/HealthBar
 
+signal healthChanged
+
 var double_jump = true
+var maxHealth = 20
 var health = 20
 var alive = true
 const SPEED = 200
 const JUMP_VELOCITY = -600
+var side = false
 
 @onready var attacking_animation: AnimationPlayer = $attackingAnimation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -26,10 +30,12 @@ func _process(delta: float) -> void:
 			velocity.x = 0
 		if !attacking:
 			if velocity.x:
-				animated_sprite_2d.flip_h = velocity.x < 0
+				animated_sprite_2d.flip_h = side
 				if velocity.x < 0:
+					side = true
 					hitbox_area.position.x=-47.75
 				else: 
+					side = false
 					hitbox_area.position.x=40.75
 					
 					
@@ -72,7 +78,7 @@ func attack():
 	
 	for area in overlapping_objects:
 		var parent = area.get_parent().get_parent()
-		parent.take_damage()
+		parent.take_damage(side)
 		
 	
 	attacking = true
@@ -88,6 +94,7 @@ func take_damage(damage):
 	if health==0:
 		print("Ninja Died")
 		player_dead()
+	healthChanged.emit()
 		
 func player_dead():
 	alive = false

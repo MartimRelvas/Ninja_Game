@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dtqkk3drik5cn" path="res://sprites/ghost/ghost-Appear.png" id="2_ulb22"]
 [ext_resource type="Texture2D" uid="uid://bhougrely4mxo" path="res://sprites/ghost/ghost-Shriek.png" id="3_1e552"]
 [ext_resource type="Texture2D" uid="uid://cndhq5ahv1f5u" path="res://sprites/ghost/ghost-Chase.png" id="4_vgurf"]
+[ext_resource type="PackedScene" uid="uid://cpnl8iw50g6qj" path="res://scene/health_bar.tscn" id="7_1e552"]
 [ext_resource type="Texture2D" uid="uid://dimerjpyvhl24" path="res://sprites/ghost/ghost-Idle.png" id="10_qhqle"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jl0n1"]
@@ -286,7 +287,40 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"applyKnockback"
+"method": &"applyKnockbackLeft"
+}, {
+"args": [],
+"method": &"resetVel"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1e552"]
+resource_name = "hurt_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.16666667, 0.23333335, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"applyKnockbackRight"
 }, {
 "args": [],
 "method": &"resetVel"
@@ -296,7 +330,8 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ulb22"]
 _data = {
 &"RESET": SubResource("Animation_b7koy"),
-&"hurt": SubResource("Animation_yvcfn")
+&"hurt_left": SubResource("Animation_yvcfn"),
+&"hurt_right": SubResource("Animation_1e552")
 }
 
 [sub_resource type="Animation" id="Animation_8u16h"]
@@ -455,6 +490,12 @@ position = Vector2(1, -1)
 scale = Vector2(1.196883, 0.88605034)
 shape = SubResource("RectangleShape2D_8u16h")
 debug_color = Color(0.27193144, 0.50184315, 1, 0.41960785)
+
+[node name="HealthBar" parent="." unique_id=738274959 instance=ExtResource("7_1e552")]
+offset_left = -3.4101877
+offset_top = -7.869664
+offset_right = 27.754684
+offset_bottom = -1.7090273
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var hitbox: Area2D = $hitbox
 @onready var hurt_animation: AnimationPlayer = $AnimatedSprite2D/hurtAnimation
 @onready var die_animation: AnimationPlayer = $AnimatedSprite2D/dieAnimation
+@onready var health_bar: ProgressBar = $HealthBar
 
 const SPEED = 90
 const JUMP_VELOCITY = -150
@@ -13,10 +14,12 @@ var alive = true
 var attacking = false
 
 var player = null
-var health = 3
+var health
 var damage = 5
 
 func _ready() -> void:
+	health=3
+	health_bar.init_health(health)
 	animated_sprite_2d.play("appear")
 	await animated_sprite_2d.animation_finished
 	
@@ -45,12 +48,16 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 		player = null
 		player_chase = false
 
-func take_damage():
+func take_damage(side):
 	health -= 1
+	health_bar.health = health
 	if health <= 0:
 		kill_enemy()
 	else:
-		hurt_animation.play("hurt")
+		if(side):
+			hurt_animation.play("hurt_left")
+		else:
+			hurt_animation.play("hurt_right")
 
 func kill_enemy():
 	alive = false
@@ -59,11 +66,17 @@ func kill_enemy():
 	await die_animation.animation_finished
 	queue_free()
 
-func applyKnockback():
+func applyKnockbackLeft():
 	velocity.y = JUMP_VELOCITY
+	velocity.x = JUMP_VELOCITY
+	
+func applyKnockbackRight():
+	velocity.y = JUMP_VELOCITY
+	velocity.x = -JUMP_VELOCITY
 	
 func resetVel():
 	velocity.y = 0
+	velocity.x = 0
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player"):

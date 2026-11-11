@@ -396,9 +396,7 @@ attacking = null
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=33352818]
 position = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_8cnhq")
-animation = &"attack"
-frame = 3
-frame_progress = 1.0
+animation = &"run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695352300]
 light_mask = 3
@@ -442,7 +440,6 @@ color = Color(0.70614016, 0.74664146, 0.766409, 1)
 texture = SubResource("GradientTexture2D_8cnhq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1458462365]
-visible = false
 position = Vector2(0, -61.30766)
 ignore_rotation = false
 zoom = Vector2(2, 2)
