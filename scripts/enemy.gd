@@ -5,6 +5,9 @@ extends CharacterBody2D
 @onready var hurt_animation: AnimationPlayer = $AnimatedSprite2D/hurtAnimation
 @onready var die_animation: AnimationPlayer = $AnimatedSprite2D/dieAnimation
 @onready var health_bar: ProgressBar = $HealthBar
+@onready var hurtbox: Area2D = $AnimatedSprite2D/hurtbox
+
+signal healthChanged
 
 const SPEED = 90
 const JUMP_VELOCITY = -150
@@ -58,8 +61,10 @@ func take_damage(side):
 			hurt_animation.play("hurt_left")
 		else:
 			hurt_animation.play("hurt_right")
+	healthChanged.emit()
 
 func kill_enemy():
+	hurtbox.queue_free()
 	alive = false
 	animated_sprite_2d.play("die")
 	die_animation.play("die")

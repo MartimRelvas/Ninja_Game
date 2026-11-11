@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bbp2glqvtogei" path="res://sprites/Run.png" id="4_m4khw"]
 [ext_resource type="Texture2D" uid="uid://c58ummbym7fcv" path="res://sprites/Fall.png" id="4_ssxdn"]
 [ext_resource type="Texture2D" uid="uid://cyqpjpfl5yckb" path="res://sprites/Take Hit.png" id="5_ssxdn"]
+[ext_resource type="PackedScene" uid="uid://cumwdo1ooor7i" path="res://scene/player_progress_bar.tscn" id="9_ssxdn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_68s0f"]
 atlas = ExtResource("1_i0xrg")
@@ -347,7 +348,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_lqfab"]
 resource_name = "attack"
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -420,7 +421,7 @@ shape = SubResource("RectangleShape2D_efd0m")
 debug_color = Color(0.64529306, 0.5228811, 0.03801752, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitboxArea" unique_id=861958635]
-position = Vector2(-45.75, -24.500004)
+position = Vector2(-48.226547, -24.868647)
 scale = Vector2(0.9964558, 1)
 shape = SubResource("RectangleShape2D_vrwi1")
 
@@ -439,12 +440,20 @@ scale = Vector2(4.7578125, 4.7578125)
 color = Color(0.70614016, 0.74664146, 0.766409, 1)
 texture = SubResource("GradientTexture2D_8cnhq")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1458462365]
-position = Vector2(0, -61.30766)
-ignore_rotation = false
+[node name="Camera2D" type="Camera2D" parent="." unique_id=380707028]
 zoom = Vector2(2, 2)
-process_callback = 0
-limit_top = -30
-limit_bottom = -30
-position_smoothing_speed = 1.0
-editor_draw_screen = false
+
+[node name="HitTimer" type="Timer" parent="." unique_id=552101629]
+wait_time = 0.15
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1491048510]
+
+[node name="TextureProgressBar" parent="CanvasLayer" unique_id=2118117090 instance=ExtResource("9_ssxdn")]
+offset_left = 42.0
+offset_top = 591.0
+offset_right = 187.00003
+offset_bottom = 736.0
+scale = Vector2(2.1599991, 2.1599991)
+
+[connection signal="timeout" from="HitTimer" to="." method="_on_attack_timer_timeout"]

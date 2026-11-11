@@ -492,10 +492,10 @@ shape = SubResource("RectangleShape2D_8u16h")
 debug_color = Color(0.27193144, 0.50184315, 1, 0.41960785)
 
 [node name="HealthBar" parent="." unique_id=738274959 instance=ExtResource("7_1e552")]
-offset_left = -3.4101877
-offset_top = -7.869664
-offset_right = 27.754684
-offset_bottom = -1.7090273
+offset_left = -1.5739329
+offset_top = -6.820376
+offset_right = 21.984245
+offset_bottom = -2.713286
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]

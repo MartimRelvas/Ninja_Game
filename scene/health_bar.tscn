@@ -5,7 +5,11 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_68s0f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xc77v"]
-bg_color = Color(1, 0.13725491, 0.19215687, 1)
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q567q"]
 bg_color = Color(0.0768358, 0.07683582, 0.076835774, 1)
@@ -19,13 +23,13 @@ shadow_offset = Vector2(0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnbl5"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="HealthBar" type="ProgressBar" unique_id=738274959]
+[node name="EnemyHealthBar" type="ProgressBar" unique_id=738274959]
 z_index = 1
 offset_left = -22.42963
 offset_top = -34.392097
 offset_right = 148.48251
 offset_bottom = -10.980507
-scale = Vector2(0.2449717, 0.12774102)
+scale = Vector2(0.27655417, 0.12774102)
 theme_override_styles/background = SubResource("StyleBoxEmpty_68s0f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xc77v")
 value = 60.0

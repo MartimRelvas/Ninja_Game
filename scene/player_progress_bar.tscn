@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cumwdo1ooor7i"]
+
+[ext_resource type="Script" uid="uid://caerr0iub160c" path="res://scripts/player_health_bar.gd" id="1_0vrdw"]
+[ext_resource type="Texture2D" uid="uid://cqj07n1n1lrue" path="res://sprites/Hearts/Hearts/PNG/health_bar/health_bar_decoration.png" id="2_i226p"]
+[ext_resource type="Texture2D" uid="uid://btsslumoqyy4l" path="res://sprites/Hearts/Hearts/PNG/health_bar/health_bar.png" id="3_0alx1"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" unique_id=2118117090]
+offset_left = 4.0
+offset_top = 34.0
+offset_right = 149.0
+offset_bottom = 179.0
+scale = Vector2(1.9999998, 1.9999998)
+value = 60.0
+texture_under = ExtResource("2_i226p")
+texture_progress = ExtResource("3_0alx1")
+texture_progress_offset = Vector2(14, 0)
+script = ExtResource("1_0vrdw")
+
+[node name="Timer" type="Timer" parent="." unique_id=1811911689]
+wait_time = 0.4
+one_shot = true

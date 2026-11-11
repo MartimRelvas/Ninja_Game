@@ -2,26 +2,33 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var character_body_2d: CharacterBody2D = $"."
 @onready var hitbox_area: Area2D = $hitboxArea
-@onready var health_bar: Node2D = $Camera2D/HealthBar
+@onready var hurtbox_area: Area2D = $hurtboxArea
+@onready var attacking_animation: AnimationPlayer = $attackingAnimation
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@export var attacking = false
+@onready var attack_timer: Timer = $HitTimer
+@onready var health_bar: TextureProgressBar = $CanvasLayer/TextureProgressBar
+
 
 signal healthChanged
 
 var double_jump = true
-var maxHealth = 20
-var health = 20
+var health 
 var alive = true
 const SPEED = 200
 const JUMP_VELOCITY = -600
 var side = false
 
-@onready var attacking_animation: AnimationPlayer = $attackingAnimation
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@export var attacking = false
+func _ready() -> void:
+	health=20
+	health_bar.init_health(health)
+	attacking=false
 
 func _process(delta: float) -> void:
 	if alive:
 		if Input.is_action_just_pressed("attack"):
-			attack()
+			if(!attacking):
+				attack()
 		if Input.is_action_pressed("ui_right"):
 			velocity.x = SPEED
 		elif Input.is_action_pressed("ui_left"):
@@ -74,30 +81,35 @@ func _physics_process(delta: float) -> void:
 	
 		
 func attack():
-	var overlapping_objects = hitbox_area.get_overlapping_areas()
-	
-	for area in overlapping_objects:
-		var parent = area.get_parent().get_parent()
-		parent.take_damage(side)
-		
-	
 	attacking = true
 	animated_sprite_2d.play("attack")
 	attacking_animation.play("attack")
-
-
+	
+	attack_timer.start()
 
 func take_damage(damage):
 	health -= damage
+	health_bar.health = health
 	animation_player.play("take_damage")
 	print("Ninja health: " , health)
 	if health==0:
 		print("Ninja Died")
 		player_dead()
-	healthChanged.emit()
+	else:
+		healthChanged.emit()
 		
 func player_dead():
+	hurtbox_area.queue_free()
 	alive = false
 	await animated_sprite_2d.animation_finished
 	get_tree().reload_current_scene()
 	
+	
+
+
+func _on_attack_timer_timeout() -> void:
+	var overlapping_objects = hitbox_area.get_overlapping_areas()
+	
+	for area in overlapping_objects:
+		var parent = area.get_parent().get_parent()
+		parent.take_damage(side)
